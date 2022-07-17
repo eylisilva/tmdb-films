@@ -10,4 +10,8 @@
     <string name="tv_shows">TV Shows</string>
     <string name="loading">Loading...</string>
     <string name="top_rated">Top-Rated</string>
+    <string name="open_in_tmdb">Open in TMDB</string>
+    <string name="share_on_facebook">Share on Facebook</string>
+    <string name="share_on_twitter">Share on Twitter</string>
+    <string name="add_to_watchlist">Add to Watchlist</string>
 </resources>
