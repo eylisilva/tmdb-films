@@ -39,8 +39,14 @@ class HomeViewModel(private val getHomePageDataUseCase: GetHomePageDataUseCase) 
             _homeUiStateFlow.update {
                 it.copy(
                     loading = HomeLoadingState.Success,
-                    moviesUiState = MoviesUiState(homeData.movieSliderItems),
-                    tvShowsUiState = TvShowsUiState(homeData.tvShowSliderItems)
+                    moviesUiState = MoviesUiState(
+                        homeData.movieSliderItems,
+                        homeData.topRatedMovieItems
+                    ),
+                    tvShowsUiState = TvShowsUiState(
+                        homeData.tvShowSliderItems,
+                        homeData.topRatedTvShowItems
+                    )
                 )
             }
         }
@@ -53,11 +59,13 @@ class HomeViewModel(private val getHomePageDataUseCase: GetHomePageDataUseCase) 
     )
 
     data class MoviesUiState(
-        val movieSliderItems: List<SliderImageData>? = null
+        val movieSliderItems: List<SliderImageData>? = null,
+        val topRatedMovieItems: List<CardData>? = null
     )
 
     data class TvShowsUiState(
-        val tvSliderItems: List<SliderImageData>? = null
+        val tvSliderItems: List<SliderImageData>? = null,
+        val topRatedTvShowItems: List<CardData>? = null
     )
 
     sealed class HomeLoadingState {

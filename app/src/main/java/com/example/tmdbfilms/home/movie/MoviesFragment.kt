@@ -1,5 +1,6 @@
 package com.example.tmdbfilms.home.movie
 
+import android.graphics.Rect
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tmdbfilms.R
 import com.example.tmdbfilms.home.*
+import com.example.tmdbfilms.utils.ViewUtils
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
 
@@ -36,6 +38,17 @@ class MoviesFragment : Fragment() {
         moviesRv.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = homeProviderMultiAdapter
+            addItemDecoration(object : RecyclerView.ItemDecoration() {
+                override fun getItemOffsets(
+                    outRect: Rect,
+                    view: View,
+                    parent: RecyclerView,
+                    state: RecyclerView.State
+                ) {
+                    super.getItemOffsets(outRect, view, parent, state)
+                    outRect.bottom = ViewUtils.dp2px(context, 16)
+                }
+            })
         }
         parentFragment?.let {
             homeViewModel = ViewModelProvider(it)[HomeViewModel::class.java]
@@ -47,7 +60,10 @@ class MoviesFragment : Fragment() {
                     if (it.moviesUiState?.movieSliderItems != null) {
                         items.add(SliderMultiEntity(it.moviesUiState.movieSliderItems))
                     }
-                    items.add(HeaderMultiEntity(getString(R.string.top_rated)))
+                    if (it.moviesUiState?.topRatedMovieItems != null) {
+                        items.add(HeaderMultiEntity(getString(R.string.top_rated)))
+                        items.add(HorizontalScrollMultiEntity(it.moviesUiState.topRatedMovieItems))
+                    }
                     homeProviderMultiAdapter.setList(items)
                 }
             }

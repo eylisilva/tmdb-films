@@ -32,7 +32,7 @@ private val client = OkHttpClient.Builder().addInterceptor(Interceptor { chain -
     val requestBuilder = original.newBuilder().url(url)
     val request = requestBuilder.build()
     val response = chain.proceed(request)
-    Log.e(TAG, "response interceptor: $response")
+    Log.i(TAG, "response interceptor: $response")
     response
 }).build()
 
@@ -47,8 +47,14 @@ interface UscFilmsApiService {
     @GET("movie/now_playing")
     suspend fun getNowPlayingMovies(): MovieResultsApiModel
 
+    @GET("movie/popular")
+    suspend fun getPopularMovies(): MovieResultsApiModel
+
     @GET("trending/tv/day")
     suspend fun getTrendingTvShows(): TvShowResultsApiModel
+
+    @GET("tv/top_rated")
+    suspend fun getTopRatedTvShows(): TvShowResultsApiModel
 
 }
 
