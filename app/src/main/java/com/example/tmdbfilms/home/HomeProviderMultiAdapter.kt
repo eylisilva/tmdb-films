@@ -6,6 +6,7 @@ class HomeProviderMultiAdapter: BaseProviderMultiAdapter<ProviderMultiEntity>() 
 
     init {
         addItemProvider(SliderItemProvider())
+        addItemProvider(HeaderItemProvider())
     }
 
     override fun getItemType(data: List<ProviderMultiEntity>, position: Int): Int {

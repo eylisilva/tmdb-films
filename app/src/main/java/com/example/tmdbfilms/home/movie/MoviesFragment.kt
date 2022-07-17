@@ -12,10 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tmdbfilms.R
-import com.example.tmdbfilms.home.HomeProviderMultiAdapter
-import com.example.tmdbfilms.home.HomeViewModel
-import com.example.tmdbfilms.home.ProviderMultiEntity
-import com.example.tmdbfilms.home.SliderMultiEntity
+import com.example.tmdbfilms.home.*
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
 
@@ -50,6 +47,7 @@ class MoviesFragment : Fragment() {
                     if (it.moviesUiState?.movieSliderItems != null) {
                         items.add(SliderMultiEntity(it.moviesUiState.movieSliderItems))
                     }
+                    items.add(HeaderMultiEntity(getString(R.string.top_rated)))
                     homeProviderMultiAdapter.setList(items)
                 }
             }
