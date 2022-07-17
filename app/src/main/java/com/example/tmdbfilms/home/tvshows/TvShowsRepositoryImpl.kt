@@ -25,4 +25,13 @@ class TvShowsRepositoryImpl(private val apiService: UscFilmsApiService) : TvShow
         }
         return items
     }
+
+    override suspend fun getPopularTvShows(): List<CardData> {
+        val resultsApiModel = apiService.getPopularTvShows()
+        val items = mutableListOf<CardData>()
+        resultsApiModel.results.take(6).forEach {
+            items.add(CardData(it.id, it.posterPath, TYPE_TV))
+        }
+        return items
+    }
 }

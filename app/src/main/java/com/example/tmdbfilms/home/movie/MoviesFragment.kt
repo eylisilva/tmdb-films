@@ -66,6 +66,10 @@ class MoviesFragment : Fragment() {
                         items.add(HeaderMultiEntity(getString(R.string.top_rated)))
                         items.add(HorizontalScrollMultiEntity(it.moviesUiState.topRatedMovieItems))
                     }
+                    if (it.moviesUiState?.popularMovieItems != null) {
+                        items.add(HeaderMultiEntity(getString(R.string.popular)))
+                        items.add(HorizontalScrollMultiEntity(it.moviesUiState.popularMovieItems))
+                    }
                     homeProviderMultiAdapter.setNewData(items)
                 }
             }

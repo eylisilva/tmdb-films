@@ -7,6 +7,8 @@ interface MoviesRepository {
 
     suspend fun getNowPlayingMovies(): List<SliderImageData>
 
+    suspend fun getTopRatedMovies(): List<CardData>
+
     suspend fun getPopularMovies(): List<CardData>
 
 }

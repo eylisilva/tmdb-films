@@ -9,4 +9,6 @@ interface TvShowsRepository {
 
     suspend fun getTopRatedTvShows(): List<CardData>
 
+    suspend fun getPopularTvShows(): List<CardData>
+
 }

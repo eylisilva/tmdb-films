@@ -41,11 +41,13 @@ class HomeViewModel(private val getHomePageDataUseCase: GetHomePageDataUseCase) 
                     loading = HomeLoadingState.Success,
                     moviesUiState = MoviesUiState(
                         homeData.movieSliderItems,
-                        homeData.topRatedMovieItems
+                        homeData.topRatedMovieItems,
+                        homeData.popularMovieItems
                     ),
                     tvShowsUiState = TvShowsUiState(
                         homeData.tvShowSliderItems,
-                        homeData.topRatedTvShowItems
+                        homeData.topRatedTvShowItems,
+                        homeData.popularTvShowItems
                     )
                 )
             }
@@ -60,12 +62,14 @@ class HomeViewModel(private val getHomePageDataUseCase: GetHomePageDataUseCase) 
 
     data class MoviesUiState(
         val movieSliderItems: List<SliderImageData>? = null,
-        val topRatedMovieItems: List<CardData>? = null
+        val topRatedMovieItems: List<CardData>? = null,
+        val popularMovieItems: List<CardData>? = null
     )
 
     data class TvShowsUiState(
         val tvSliderItems: List<SliderImageData>? = null,
-        val topRatedTvShowItems: List<CardData>? = null
+        val topRatedTvShowItems: List<CardData>? = null,
+        val popularTvShowItems: List<CardData>? = null
     )
 
     sealed class HomeLoadingState {

@@ -66,6 +66,10 @@ class TvShowsFragment : Fragment() {
                         items.add(HeaderMultiEntity(getString(R.string.top_rated)))
                         items.add(HorizontalScrollMultiEntity(it.tvShowsUiState.topRatedTvShowItems))
                     }
+                    if (it.tvShowsUiState?.popularTvShowItems != null) {
+                        items.add(HeaderMultiEntity(getString(R.string.popular)))
+                        items.add(HorizontalScrollMultiEntity(it.tvShowsUiState.popularTvShowItems))
+                    }
                     homeProviderMultiAdapter.setList(items)
                 }
             }

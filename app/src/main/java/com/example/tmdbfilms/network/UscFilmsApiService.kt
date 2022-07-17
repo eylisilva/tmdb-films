@@ -61,6 +61,9 @@ interface UscFilmsApiService {
     @GET("movie/now_playing")
     suspend fun getNowPlayingMovies(): MovieResultsApiModel
 
+    @GET("movie/top_rated")
+    suspend fun getTopRatedMovies(): MovieResultsApiModel
+
     @GET("movie/popular")
     suspend fun getPopularMovies(): MovieResultsApiModel
 
@@ -69,6 +72,9 @@ interface UscFilmsApiService {
 
     @GET("tv/top_rated")
     suspend fun getTopRatedTvShows(): TvShowResultsApiModel
+
+    @GET("tv/popular")
+    suspend fun getPopularTvShows(): TvShowResultsApiModel
 
 }
 

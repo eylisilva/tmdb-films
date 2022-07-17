@@ -15,6 +15,9 @@ class GetHomePageDataUseCase(
                 moviesRepository.getNowPlayingMovies()
             }
             val topRatedMovieItems = async {
+                moviesRepository.getTopRatedMovies()
+            }
+            val popularMovieItems = async {
                 moviesRepository.getPopularMovies()
             }
             val tvShowSliderImageItems = async {
@@ -23,11 +26,16 @@ class GetHomePageDataUseCase(
             val topRatedTvShowItems = async {
                 tvShowsRepository.getTopRatedTvShows()
             }
+            val popularTvShowItems = async {
+                tvShowsRepository.getPopularTvShows()
+            }
             HomePageData(
                 movieSliderItems = movieSliderImageItems.await(),
                 tvShowSliderItems = tvShowSliderImageItems.await(),
                 topRatedMovieItems = topRatedMovieItems.await(),
-                topRatedTvShowItems = topRatedTvShowItems.await()
+                topRatedTvShowItems = topRatedTvShowItems.await(),
+                popularMovieItems = popularMovieItems.await(),
+                popularTvShowItems = popularTvShowItems.await()
             )
         }
     }
