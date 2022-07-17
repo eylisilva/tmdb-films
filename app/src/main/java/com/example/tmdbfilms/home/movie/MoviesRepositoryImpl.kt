@@ -6,6 +6,7 @@ import com.example.tmdbfilms.home.SliderImageData
 import com.example.tmdbfilms.network.UscFilmsApiService
 
 private const val TAG = "MoviesRepositoryImpl"
+private const val TYPE_MOVIE = "movie"
 
 class MoviesRepositoryImpl(private val apiService: UscFilmsApiService) : MoviesRepository {
 
@@ -24,7 +25,7 @@ class MoviesRepositoryImpl(private val apiService: UscFilmsApiService) : MoviesR
         val items = mutableListOf<CardData>()
         Log.i(TAG, "getPopularMovies size: ${items.size}")
         resultsApiModel.results.take(10).forEach {
-            items.add(CardData(it.id, it.posterPath))
+            items.add(CardData(it.id, it.posterPath, TYPE_MOVIE))
         }
         return items
     }

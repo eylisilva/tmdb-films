@@ -18,6 +18,8 @@ import com.example.tmdbfilms.utils.ViewUtils
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
 
+private const val ITEM_MARGIN = 16
+
 class MoviesFragment : Fragment() {
 
     private lateinit var moviesRv: RecyclerView
@@ -46,7 +48,7 @@ class MoviesFragment : Fragment() {
                     state: RecyclerView.State
                 ) {
                     super.getItemOffsets(outRect, view, parent, state)
-                    outRect.bottom = ViewUtils.dp2px(context, 16)
+                    outRect.bottom = ViewUtils.dp2px(context, ITEM_MARGIN)
                 }
             })
         }
@@ -64,7 +66,7 @@ class MoviesFragment : Fragment() {
                         items.add(HeaderMultiEntity(getString(R.string.top_rated)))
                         items.add(HorizontalScrollMultiEntity(it.moviesUiState.topRatedMovieItems))
                     }
-                    homeProviderMultiAdapter.setList(items)
+                    homeProviderMultiAdapter.setNewData(items)
                 }
             }
         }

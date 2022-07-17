@@ -1,5 +1,6 @@
 package com.example.tmdbfilms.home.tvshows
 
+import android.graphics.Rect
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,8 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tmdbfilms.R
 import com.example.tmdbfilms.home.*
+import com.example.tmdbfilms.utils.ViewUtils
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
+
+private const val ITEM_MARGIN = 16
 
 class TvShowsFragment : Fragment() {
 
@@ -26,7 +30,6 @@ class TvShowsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tv_shows, container, false)
     }
 
@@ -37,6 +40,17 @@ class TvShowsFragment : Fragment() {
         tvShowsRv.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = homeProviderMultiAdapter
+            addItemDecoration(object : RecyclerView.ItemDecoration() {
+                override fun getItemOffsets(
+                    outRect: Rect,
+                    view: View,
+                    parent: RecyclerView,
+                    state: RecyclerView.State
+                ) {
+                    super.getItemOffsets(outRect, view, parent, state)
+                    outRect.bottom = ViewUtils.dp2px(context, ITEM_MARGIN)
+                }
+            })
         }
         parentFragment?.let {
             homeViewModel = ViewModelProvider(it)[HomeViewModel::class.java]
@@ -48,7 +62,10 @@ class TvShowsFragment : Fragment() {
                     if (it.tvShowsUiState?.tvSliderItems != null) {
                         items.add(SliderMultiEntity(it.tvShowsUiState.tvSliderItems))
                     }
-                    items.add(HeaderMultiEntity(getString(R.string.top_rated)))
+                    if (it.tvShowsUiState?.topRatedTvShowItems != null) {
+                        items.add(HeaderMultiEntity(getString(R.string.top_rated)))
+                        items.add(HorizontalScrollMultiEntity(it.tvShowsUiState.topRatedTvShowItems))
+                    }
                     homeProviderMultiAdapter.setList(items)
                 }
             }

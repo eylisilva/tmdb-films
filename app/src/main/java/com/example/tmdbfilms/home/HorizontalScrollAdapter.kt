@@ -11,11 +11,11 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.tmdbfilms.R
 
 private const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"
-private const val TMDB_URI = "https://www.themoviedb.org/movie/"
+private const val TMDB_URI = "https://www.themoviedb.org/"
 private const val FACEBOOK_URI =
-    "https://www.facebook.com/sharer/sharer.php?u=https://www.themoviedb.org/movie/"
+    "https://www.facebook.com/sharer/sharer.php?u=https://www.themoviedb.org/"
 private const val TWITTER_URI =
-    "https://twitter.com/intent/tweet?text=Check this out!%0Ahttps://www.themoviedb.org/movie/"
+    "https://twitter.com/intent/tweet?text=Check this out!%0Ahttps://www.themoviedb.org/"
 
 class HorizontalScrollAdapter :
     BaseQuickAdapter<CardData, BaseViewHolder>(R.layout.item_horizontal_scroll_card) {
@@ -32,7 +32,7 @@ class HorizontalScrollAdapter :
                     R.id.open_in_tmdb -> {
                         val intent = Intent(
                             Intent.ACTION_VIEW,
-                            Uri.parse("${TMDB_URI}${item.id}")
+                            Uri.parse("${TMDB_URI}${item.type}/${item.id}")
                         )
                         context.startActivity(intent)
                         true
@@ -40,7 +40,7 @@ class HorizontalScrollAdapter :
                     R.id.share_on_facebook -> {
                         val intent = Intent(
                             Intent.ACTION_VIEW,
-                            Uri.parse("${FACEBOOK_URI}${item.id}&amp;src=sdkpreparse")
+                            Uri.parse("${FACEBOOK_URI}${item.type}/${item.id}&amp;src=sdkpreparse")
                         )
                         context.startActivity(intent)
                         true
@@ -48,7 +48,7 @@ class HorizontalScrollAdapter :
                     R.id.share_on_twitter -> {
                         val intent = Intent(
                             Intent.ACTION_VIEW,
-                            Uri.parse("${TWITTER_URI}${item.id}")
+                            Uri.parse("${TWITTER_URI}${item.type}/${item.id}")
                         )
                         context.startActivity(intent)
                         true
