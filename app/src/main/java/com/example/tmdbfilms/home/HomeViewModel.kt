@@ -57,7 +57,7 @@ class HomeViewModel(private val getHomePageDataUseCase: GetHomePageDataUseCase) 
     )
 
     data class TvShowsUiState(
-        val movieSliderItems: List<SliderImageData>? = null
+        val tvSliderItems: List<SliderImageData>? = null
     )
 
     sealed class HomeLoadingState {

@@ -7,18 +7,18 @@
     <ImageView
         android:id="@+id/iv_slider_blurred"
         android:layout_width="match_parent"
+        android:layout_height="330dp"
+        android:contentDescription="@null"
         android:scaleType="fitXY"
-        android:layout_height="match_parent"
-        android:contentDescription="@null" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_slider"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="330dp"
         android:layout_marginStart="60dp"
         android:layout_marginEnd="60dp"
         android:contentDescription="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

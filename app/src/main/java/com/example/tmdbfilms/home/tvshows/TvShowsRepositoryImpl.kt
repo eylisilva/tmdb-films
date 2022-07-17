@@ -8,7 +8,7 @@ class TvShowsRepositoryImpl(private val apiService: UscFilmsApiService) : TvShow
     override suspend fun getTrendingTvShows(): List<SliderImageData> {
         val resultsApiModel = apiService.getTrendingTvShows()
         val items = mutableListOf<SliderImageData>()
-        resultsApiModel.results.forEach {
+        resultsApiModel.results.take(6).forEach {
             items.add(SliderImageData(it.id, it.posterPath))
         }
         return items
