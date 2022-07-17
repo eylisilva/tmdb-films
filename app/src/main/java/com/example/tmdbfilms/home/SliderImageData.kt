@@ -1,6 +1,6 @@
 package com.example.tmdbfilms.home
 
-data class SliderImageItem(
+data class SliderImageData(
     val id: Int,
     val posterPath: String
 )

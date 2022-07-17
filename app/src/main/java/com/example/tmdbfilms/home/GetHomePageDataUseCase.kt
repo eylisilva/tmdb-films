@@ -17,15 +17,10 @@ class GetHomePageDataUseCase(
             val tvShowSliderImageItems = async {
                 tvShowsRepository.getTrendingTvShows()
             }
-            try {
-                HomePageData(
-                    success = true,
-                    movieSliderItems = movieSliderImageItems.await(),
-                    tvShowSliderItems = tvShowSliderImageItems.await()
-                )
-            } catch (e: Exception) {
-                HomePageData(success = false)
-            }
+            HomePageData(
+                movieSliderItems = movieSliderImageItems.await(),
+                tvShowSliderItems = tvShowSliderImageItems.await()
+            )
         }
     }
 }

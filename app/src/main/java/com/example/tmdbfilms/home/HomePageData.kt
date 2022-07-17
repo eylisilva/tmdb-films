@@ -1,7 +1,6 @@
 package com.example.tmdbfilms.home
 
 data class HomePageData(
-    val success: Boolean,
-    val movieSliderItems: List<SliderImageItem>? = null,
-    val tvShowSliderItems: List<SliderImageItem>? = null
+    val movieSliderItems: List<SliderImageData>? = null,
+    val tvShowSliderItems: List<SliderImageData>? = null
 )

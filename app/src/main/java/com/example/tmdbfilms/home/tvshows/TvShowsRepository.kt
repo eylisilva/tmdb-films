@@ -1,9 +1,9 @@
 package com.example.tmdbfilms.home.tvshows
 
-import com.example.tmdbfilms.home.SliderImageItem
+import com.example.tmdbfilms.home.SliderImageData
 
 interface TvShowsRepository {
 
-    suspend fun getTrendingTvShows(): List<SliderImageItem>
+    suspend fun getTrendingTvShows(): List<SliderImageData>
 
 }

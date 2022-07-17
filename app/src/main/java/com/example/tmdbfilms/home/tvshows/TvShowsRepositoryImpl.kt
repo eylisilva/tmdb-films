@@ -1,15 +1,15 @@
 package com.example.tmdbfilms.home.tvshows
 
-import com.example.tmdbfilms.home.SliderImageItem
+import com.example.tmdbfilms.home.SliderImageData
 import com.example.tmdbfilms.network.UscFilmsApiService
 
 class TvShowsRepositoryImpl(private val apiService: UscFilmsApiService) : TvShowsRepository {
 
-    override suspend fun getTrendingTvShows(): List<SliderImageItem> {
+    override suspend fun getTrendingTvShows(): List<SliderImageData> {
         val resultsApiModel = apiService.getTrendingTvShows()
-        val items = mutableListOf<SliderImageItem>()
+        val items = mutableListOf<SliderImageData>()
         resultsApiModel.results.forEach {
-            items.add(SliderImageItem(it.id, it.posterPath))
+            items.add(SliderImageData(it.id, it.posterPath))
         }
         return items
     }
