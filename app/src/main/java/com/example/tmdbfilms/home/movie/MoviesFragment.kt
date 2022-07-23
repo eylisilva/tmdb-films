@@ -52,6 +52,9 @@ class MoviesFragment : Fragment() {
                 }
             })
         }
+        homeProviderMultiAdapter.setFooterView(
+            LayoutInflater.from(context).inflate(R.layout.item_footer, moviesRv, false)
+        )
         parentFragment?.let {
             homeViewModel = ViewModelProvider(it)[HomeViewModel::class.java]
         }
@@ -70,7 +73,7 @@ class MoviesFragment : Fragment() {
                         items.add(HeaderMultiEntity(getString(R.string.popular)))
                         items.add(HorizontalScrollMultiEntity(it.moviesUiState.popularMovieItems))
                     }
-                    homeProviderMultiAdapter.setNewData(items)
+                    homeProviderMultiAdapter.setList(items)
                 }
             }
         }

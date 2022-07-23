@@ -15,4 +15,6 @@
     <string name="share_on_facebook">Share on Facebook</string>
     <string name="share_on_twitter">Share on Twitter</string>
     <string name="add_to_watchlist">Add to Watchlist</string>
+    <string name="powered_by_tmdb">Powered by TMDB</string>
+    <string name="developed_by">Developed by Enyu Li</string>
 </resources>

@@ -52,6 +52,9 @@ class TvShowsFragment : Fragment() {
                 }
             })
         }
+        homeProviderMultiAdapter.setFooterView(
+            LayoutInflater.from(context).inflate(R.layout.item_footer, tvShowsRv, false)
+        )
         parentFragment?.let {
             homeViewModel = ViewModelProvider(it)[HomeViewModel::class.java]
         }
