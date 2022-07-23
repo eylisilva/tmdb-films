@@ -3,6 +3,7 @@ package com.example.tmdbfilms.network
 import android.util.Log
 import com.example.tmdbfilms.home.movie.MovieResultsApiModel
 import com.example.tmdbfilms.home.tvshows.TvShowResultsApiModel
+import com.example.tmdbfilms.search.SearchResultsApiModel
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.Moshi
@@ -12,6 +13,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 private const val TAG = "UscFilmsApiService"
 
@@ -75,6 +77,9 @@ interface UscFilmsApiService {
 
     @GET("tv/popular")
     suspend fun getPopularTvShows(): TvShowResultsApiModel
+
+    @GET("search/multi")
+    suspend fun multiSearch(@Query("query") query: String): SearchResultsApiModel
 
 }
 
