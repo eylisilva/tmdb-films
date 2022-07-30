@@ -18,9 +18,9 @@ private const val TWITTER_URI =
     "https://twitter.com/intent/tweet?text=Check this out!%0Ahttps://www.themoviedb.org/"
 
 class HorizontalScrollAdapter :
-    BaseQuickAdapter<CardData, BaseViewHolder>(R.layout.item_horizontal_scroll_card) {
+    BaseQuickAdapter<CardUiState, BaseViewHolder>(R.layout.item_horizontal_scroll_card) {
 
-    override fun convert(holder: BaseViewHolder, item: CardData) {
+    override fun convert(holder: BaseViewHolder, item: CardUiState) {
         val posterIv = holder.getView<ImageView>(R.id.iv_poster)
         posterIv.load("${IMAGE_BASE_URL}${item.posterPath}")
         val btnMenuIv = holder.getView<ImageButton>(R.id.iv_btn_menu)
@@ -54,12 +54,22 @@ class HorizontalScrollAdapter :
                         true
                     }
                     R.id.add_to_watchlist -> {
+                        if (item.addedToWatchList) {
+                            item.onRemoveFromWatchList.invoke()
+                        } else {
+                            item.onAddToWatchList.invoke()
+                        }
                         true
                     }
                     else -> {
                         false
                     }
                 }
+            }
+            if (item.addedToWatchList) {
+                popupMenu.menu.getItem(3).title = context.getString(R.string.remove_from_watch_list)
+            } else {
+                popupMenu.menu.getItem(3).title = context.getString(R.string.add_to_watchlist)
             }
             popupMenu.show()
         }

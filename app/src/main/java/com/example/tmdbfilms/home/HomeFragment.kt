@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.Group
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -57,6 +58,15 @@ class HomeFragment : Fragment() {
                     GetHomePageDataUseCase(
                         container.moviesRepository,
                         container.tvShowsRepository
+                    ),
+                    IsContainedInWatchListUseCase(
+                        container.watchListRepository
+                    ),
+                    AddToWatchListUseCase(
+                        container.watchListRepository
+                    ),
+                    RemoveFromWatchListUseCase(
+                        container.watchListRepository
                     )
                 )
             )[HomeViewModel::class.java]
@@ -78,6 +88,20 @@ class HomeFragment : Fragment() {
                             loadingView.isVisible = true
                             loadingGroup.isGone = true
                         }
+                    }
+                }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                homeViewModel.homeUiStateFlow.distinctUntilChangedBy { it.toastMessage }.collect {
+                    if (it.toastMessage != null) {
+                        Toast.makeText(
+                            context?.applicationContext,
+                            it.toastMessage,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        homeViewModel.userToastShown()
                     }
                 }
             }

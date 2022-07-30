@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.tmdbfilms.watchlist.WatchListItem
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +15,12 @@ import kotlinx.coroutines.launch
 private const val TAG = "HomeViewModel"
 
 @Suppress("UNCHECKED_CAST")
-class HomeViewModel(private val getHomePageDataUseCase: GetHomePageDataUseCase) : ViewModel() {
+class HomeViewModel(
+    private val getHomePageDataUseCase: GetHomePageDataUseCase,
+    private val isContainedInWatchListUseCase: IsContainedInWatchListUseCase,
+    private val addToWatchListUseCase: AddToWatchListUseCase,
+    private val removeFromWatchListUseCase: RemoveFromWatchListUseCase
+) : ViewModel() {
 
     private val _homeUiStateFlow = MutableStateFlow(
         HomeUiState(
@@ -41,35 +47,81 @@ class HomeViewModel(private val getHomePageDataUseCase: GetHomePageDataUseCase) 
                     loading = HomeLoadingState.Success,
                     moviesUiState = MoviesUiState(
                         homeData.movieSliderItems,
-                        homeData.topRatedMovieItems,
-                        homeData.popularMovieItems
+                        convertToUiState(homeData.topRatedMovieItems),
+                        convertToUiState(homeData.popularMovieItems)
                     ),
                     tvShowsUiState = TvShowsUiState(
                         homeData.tvShowSliderItems,
-                        homeData.topRatedTvShowItems,
-                        homeData.popularTvShowItems
+                        convertToUiState(homeData.topRatedTvShowItems),
+                        convertToUiState(homeData.popularTvShowItems)
                     )
                 )
             }
         }
     }
 
+    fun userToastShown() {
+        _homeUiStateFlow.update {
+            it.copy(toastMessage = null)
+        }
+    }
+
+    private suspend fun convertToUiState(list: List<CardData>?): List<CardUiState> {
+        val results = mutableListOf<CardUiState>()
+        list?.forEach {
+            val addedToWatchList = isContainedInWatchListUseCase.isContainedInWatchList(it.id)
+            results.add(
+                CardUiState(
+                    id = it.id,
+                    posterPath = it.posterPath,
+                    type = it.type,
+                    addedToWatchList = addedToWatchList,
+                    onAddToWatchList = {
+                        viewModelScope.launch {
+                            addToWatchListUseCase.addToWatchList(
+                                WatchListItem(
+                                    it.id,
+                                    it.title,
+                                    it.posterPath,
+                                    it.type
+                                )
+                            )
+                            _homeUiStateFlow.update { state ->
+                                state.copy(toastMessage = "${it.title} was added to Watchlist")
+                            }
+                        }
+                    },
+                    onRemoveFromWatchList = {
+                        viewModelScope.launch {
+                            removeFromWatchListUseCase.removeFromWatchList(it.id)
+                            _homeUiStateFlow.update { state ->
+                                state.copy(toastMessage = "${it.title} was removed from Watchlist")
+                            }
+                        }
+                    }
+                )
+            )
+        }
+        return results
+    }
+
     data class HomeUiState(
         val loading: HomeLoadingState,
         val moviesUiState: MoviesUiState? = null,
-        val tvShowsUiState: TvShowsUiState? = null
+        val tvShowsUiState: TvShowsUiState? = null,
+        val toastMessage: String? = null
     )
 
     data class MoviesUiState(
         val movieSliderItems: List<SliderImageData>? = null,
-        val topRatedMovieItems: List<CardData>? = null,
-        val popularMovieItems: List<CardData>? = null
+        val topRatedMovieItems: List<CardUiState>? = null,
+        val popularMovieItems: List<CardUiState>? = null
     )
 
     data class TvShowsUiState(
         val tvSliderItems: List<SliderImageData>? = null,
-        val topRatedTvShowItems: List<CardData>? = null,
-        val popularTvShowItems: List<CardData>? = null
+        val topRatedTvShowItems: List<CardUiState>? = null,
+        val popularTvShowItems: List<CardUiState>? = null
     )
 
     sealed class HomeLoadingState {
@@ -84,11 +136,21 @@ class HomeViewModel(private val getHomePageDataUseCase: GetHomePageDataUseCase) 
 
     }
 
-    class HomeViewModelFactory(private val getHomePageDataUseCase: GetHomePageDataUseCase) :
+    class HomeViewModelFactory(
+        private val getHomePageDataUseCase: GetHomePageDataUseCase,
+        private val isContainedInWatchListUseCase: IsContainedInWatchListUseCase,
+        private val addToWatchListUseCase: AddToWatchListUseCase,
+        private val removeFromWatchListUseCase: RemoveFromWatchListUseCase
+    ) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-                return HomeViewModel(getHomePageDataUseCase) as T
+                return HomeViewModel(
+                    getHomePageDataUseCase,
+                    isContainedInWatchListUseCase,
+                    addToWatchListUseCase,
+                    removeFromWatchListUseCase
+                ) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

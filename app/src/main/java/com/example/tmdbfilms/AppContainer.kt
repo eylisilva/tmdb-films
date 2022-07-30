@@ -8,11 +8,14 @@ import com.example.tmdbfilms.home.tvshows.TvShowsRepositoryImpl
 import com.example.tmdbfilms.network.UscFilmsApi
 import com.example.tmdbfilms.search.SearchRepository
 import com.example.tmdbfilms.search.SearchRepositoryImpl
+import com.example.tmdbfilms.watchlist.WatchListRepository
+import com.example.tmdbfilms.watchlist.WatchListRepositoryImpl
 
 interface AppContainer {
     val moviesRepository: MoviesRepository
     val tvShowsRepository: TvShowsRepository
     val searchRepository: SearchRepository
+    val watchListRepository: WatchListRepository
 }
 
 class AppContainerImpl(private val applicationContext: Context): AppContainer {
@@ -26,5 +29,8 @@ class AppContainerImpl(private val applicationContext: Context): AppContainer {
     }
     override val searchRepository: SearchRepository
         get() = SearchRepositoryImpl(UscFilmsApi.retrofitService)
+
+    override val watchListRepository: WatchListRepository
+        get() = WatchListRepositoryImpl(applicationContext)
 
 }

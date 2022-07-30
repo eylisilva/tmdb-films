@@ -19,4 +19,8 @@
     <string name="developed_by">Developed by Enyu Li</string>
     <string name="search_movies_and_tv">Search movies and TV</string>
     <string name="no_result_found">No result found.</string>
+    <string name="nothing_saved_to_watchlist">Nothing saved to Watchlist</string>
+    <string name="remove_from_watch_list">Remove from Watchlist</string>
+    <string name="add_to_watch_list">Add to Watchlist</string>
+
 </resources>

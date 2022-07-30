@@ -21,7 +21,7 @@ class TvShowsRepositoryImpl(private val apiService: UscFilmsApiService) : TvShow
         val resultsApiModel = apiService.getTopRatedTvShows()
         val items = mutableListOf<CardData>()
         resultsApiModel.results.take(6).forEach {
-            items.add(CardData(it.id, it.posterPath, TYPE_TV))
+            items.add(CardData(it.id, it.posterPath, TYPE_TV, it.name))
         }
         return items
     }
@@ -30,7 +30,7 @@ class TvShowsRepositoryImpl(private val apiService: UscFilmsApiService) : TvShow
         val resultsApiModel = apiService.getPopularTvShows()
         val items = mutableListOf<CardData>()
         resultsApiModel.results.take(6).forEach {
-            items.add(CardData(it.id, it.posterPath, TYPE_TV))
+            items.add(CardData(it.id, it.posterPath, TYPE_TV, it.name))
         }
         return items
     }

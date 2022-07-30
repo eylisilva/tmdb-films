@@ -25,7 +25,7 @@ class MoviesRepositoryImpl(private val apiService: UscFilmsApiService) : MoviesR
         val items = mutableListOf<CardData>()
         Log.i(TAG, "getTopRatedMovies size: ${items.size}")
         resultsApiModel.results.take(10).forEach {
-            items.add(CardData(it.id, it.posterPath, TYPE_MOVIE))
+            items.add(CardData(it.id, it.posterPath, TYPE_MOVIE, it.title))
         }
         return items
     }
@@ -35,7 +35,7 @@ class MoviesRepositoryImpl(private val apiService: UscFilmsApiService) : MoviesR
         val items = mutableListOf<CardData>()
         Log.i(TAG, "getPopularMovies size: ${items.size}")
         resultsApiModel.results.take(10).forEach {
-            items.add(CardData(it.id, it.posterPath, TYPE_MOVIE))
+            items.add(CardData(it.id, it.posterPath, TYPE_MOVIE, it.title))
         }
         return items
     }
