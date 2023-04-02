@@ -11,4 +11,6 @@ interface MoviesRepository {
 
     suspend fun getPopularMovies(): List<CardData>
 
+    suspend fun getMovieRecommendations(movieId: Int): List<CardData>
+
 }

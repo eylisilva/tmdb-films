@@ -11,4 +11,6 @@ interface TvShowsRepository {
 
     suspend fun getPopularTvShows(): List<CardData>
 
+    suspend fun getTvRecommendations(tvId: Int): List<CardData>
+
 }

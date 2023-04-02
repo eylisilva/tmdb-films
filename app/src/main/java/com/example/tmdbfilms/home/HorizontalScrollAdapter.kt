@@ -9,6 +9,7 @@ import coil.load
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.tmdbfilms.R
+import com.example.tmdbfilms.detail.DetailActivity
 
 private const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"
 private const val TMDB_URI = "https://www.themoviedb.org/"
@@ -23,6 +24,17 @@ class HorizontalScrollAdapter :
     override fun convert(holder: BaseViewHolder, item: CardUiState) {
         val posterIv = holder.getView<ImageView>(R.id.iv_poster)
         posterIv.load("${IMAGE_BASE_URL}${item.posterPath}")
+        posterIv.setOnClickListener {
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("id", item.id)
+            val mediaType = when (item.type) {
+                "movie" -> 1
+                "tv" -> 2
+                else -> 1
+            }
+            intent.putExtra("media_type", mediaType)
+            context.startActivity(intent)
+        }
         val btnMenuIv = holder.getView<ImageButton>(R.id.iv_btn_menu)
         btnMenuIv.setOnClickListener {
             val popupMenu = PopupMenu(context, btnMenuIv)

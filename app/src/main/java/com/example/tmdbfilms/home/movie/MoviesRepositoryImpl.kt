@@ -15,7 +15,7 @@ class MoviesRepositoryImpl(private val apiService: UscFilmsApiService) : MoviesR
         val items = mutableListOf<SliderImageData>()
         Log.i(TAG, "getNowPlayingMovies size: ${items.size}")
         resultsApiModel.results.take(6).forEach {
-            items.add(SliderImageData(it.id, it.posterPath))
+            items.add(SliderImageData(it.id, it.posterPath, TYPE_MOVIE))
         }
         return items
     }
@@ -34,6 +34,16 @@ class MoviesRepositoryImpl(private val apiService: UscFilmsApiService) : MoviesR
         val resultsApiModel = apiService.getPopularMovies()
         val items = mutableListOf<CardData>()
         Log.i(TAG, "getPopularMovies size: ${items.size}")
+        resultsApiModel.results.take(10).forEach {
+            items.add(CardData(it.id, it.posterPath, TYPE_MOVIE, it.title))
+        }
+        return items
+    }
+
+    override suspend fun getMovieRecommendations(movieId: Int): List<CardData> {
+        val resultsApiModel = apiService.getMovieRecommendations(movieId)
+        val items = mutableListOf<CardData>()
+        Log.i(TAG, "getMovieRecommendations size: ${items.size}")
         resultsApiModel.results.take(10).forEach {
             items.add(CardData(it.id, it.posterPath, TYPE_MOVIE, it.title))
         }

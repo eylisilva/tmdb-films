@@ -16,7 +16,7 @@ class SliderItemProvider: BaseItemProvider<ProviderMultiEntity>() {
     override fun convert(helper: BaseViewHolder, item: ProviderMultiEntity) {
         val sliderView = helper.getView<SliderView>(R.id.slider_view)
         val items = (item as SliderMultiEntity).items
-        val adapter = HomeSliderAdapter()
+        val adapter = HomeSliderAdapter(context)
         adapter.setNewData(items)
         sliderView.apply {
             setSliderAdapter(adapter)

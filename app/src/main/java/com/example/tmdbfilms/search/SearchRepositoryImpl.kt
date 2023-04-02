@@ -1,6 +1,7 @@
 package com.example.tmdbfilms.search
 
 import com.example.tmdbfilms.network.UscFilmsApiService
+import java.text.DecimalFormat
 
 private const val MEDIA_TYPE_PERSON = "person"
 private const val MEDIA_TYPE_TV = "tv"
@@ -25,11 +26,6 @@ class SearchRepositoryImpl(private val apiService: UscFilmsApiService) : SearchR
                     ""
                 }
             }
-            val typeAndYear = if (it.releaseDate == null) {
-                it.mediaType.uppercase()
-            } else {
-                "${it.mediaType.uppercase()}(${it.releaseDate.split("-")[0]})"
-            }
             val rating = if (it.voteAverage == null) {
                 0.0
             } else {
@@ -39,7 +35,8 @@ class SearchRepositoryImpl(private val apiService: UscFilmsApiService) : SearchR
                 SearchData(
                     id = it.id,
                     backdropPath = it.backdropPath,
-                    typeAndYear = typeAndYear,
+                    mediaType = it.mediaType,
+                    releaseDate = it.releaseDate,
                     title = title.uppercase(),
                     rating = rating
                 )
