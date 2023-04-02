@@ -22,5 +22,6 @@
     <string name="nothing_saved_to_watchlist">Nothing saved to Watchlist</string>
     <string name="remove_from_watch_list">Remove from Watchlist</string>
     <string name="add_to_watch_list">Add to Watchlist</string>
+    <string name="overview">Overview</string>
 
 </resources>

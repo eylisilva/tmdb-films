@@ -13,6 +13,7 @@ class DetailProviderMultiAdapter(lifecycle: Lifecycle): BaseProviderMultiAdapter
         addItemProvider(TrailerItemProvider(lifecycle))
         addItemProvider(PlaceholderBackdropItemProvider())
         addItemProvider(DetailNameItemProvider())
+        addItemProvider(DetailSubtitleItemProvider())
     }
 
     override fun getItemType(data: List<ProviderMultiEntity>, position: Int): Int {

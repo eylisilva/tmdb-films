@@ -41,6 +41,7 @@ class DetailActivity : BaseActivity() {
                         items.add(PlaceHolderBackdropMultiEntity(it.backdropPath))
                     }
                     items.add(DetailNameMultiEntity(it.name))
+                    items.add(DetailSubtitleMultiEntity(getString(R.string.overview)))
                     detailAdapter.setList(items)
                 }
             }
