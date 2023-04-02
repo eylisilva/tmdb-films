@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tmdbfilms.BaseActivity
 import com.example.tmdbfilms.R
+import com.example.tmdbfilms.detail.video.PlaceHolderBackdropMultiEntity
 import com.example.tmdbfilms.detail.video.TrailerMultiEntity
 import com.example.tmdbfilms.home.ProviderMultiEntity
 import kotlinx.coroutines.launch
@@ -35,6 +36,8 @@ class DetailActivity : BaseActivity() {
                     val items = mutableListOf<ProviderMultiEntity>()
                     if (it.trailerVideoKey.isNotEmpty()) {
                         items.add(TrailerMultiEntity(it.trailerVideoKey))
+                    } else {
+                        items.add(PlaceHolderBackdropMultiEntity(it.backdropPath))
                     }
                     detailAdapter.setList(items)
                 }

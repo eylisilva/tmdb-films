@@ -32,8 +32,9 @@
         <entry key="app/src/main/res/layout/item_horizontal_scroll.xml" value="0.1234375" />
         <entry key="app/src/main/res/layout/item_horizontal_scroll_card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_image_slider.xml" value="0.11" />
+        <entry key="app/src/main/res/layout/item_placeholder_backdrop.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_search_result.xml" value="0.23097826086956522" />
-        <entry key="app/src/main/res/layout/item_trailer.xml" value="0.20199275362318841" />
+        <entry key="app/src/main/res/layout/item_trailer.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_watch_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/view_image_slider.xml" value="0.1046875" />
         <entry key="app/src/main/res/layout/view_search_empty.xml" value="0.23097826086956522" />
