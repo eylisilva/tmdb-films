@@ -21,7 +21,8 @@ private const val TAG = "DetailViewModel"
 
 data class DetailUiState(
     val trailerVideoKey: String = "",
-    val backdropPath: String = ""
+    val backdropPath: String = "",
+    val name: String = ""
 )
 
 @Suppress("UNCHECKED_CAST")
@@ -55,7 +56,8 @@ class DetailViewModel(private val getDetailPageDataUseCase: GetDetailPageDataUse
             _uiState.update {
                 it.copy(
                     trailerVideoKey = detailPageData.videoKey ?: "",
-                    backdropPath = detailPageData.detailData.backdropPath
+                    backdropPath = detailPageData.detailData.backdropPath,
+                    name = detailPageData.detailData.title
                 )
             }
         }

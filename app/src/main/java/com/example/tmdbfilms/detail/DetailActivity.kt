@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tmdbfilms.BaseActivity
 import com.example.tmdbfilms.R
+import com.example.tmdbfilms.detail.name.DetailNameMultiEntity
 import com.example.tmdbfilms.detail.video.PlaceHolderBackdropMultiEntity
 import com.example.tmdbfilms.detail.video.TrailerMultiEntity
 import com.example.tmdbfilms.home.ProviderMultiEntity
@@ -27,7 +28,7 @@ class DetailActivity : BaseActivity() {
         setContentView(R.layout.activity_detail)
         detailRv = findViewById(R.id.rv_detail)
         detailRv?.layoutManager = LinearLayoutManager(this).apply {
-            orientation =  LinearLayoutManager.HORIZONTAL
+            orientation =  LinearLayoutManager.VERTICAL
         }
         detailRv?.adapter = detailAdapter
         lifecycleScope.launch {
@@ -39,6 +40,7 @@ class DetailActivity : BaseActivity() {
                     } else {
                         items.add(PlaceHolderBackdropMultiEntity(it.backdropPath))
                     }
+                    items.add(DetailNameMultiEntity(it.name))
                     detailAdapter.setList(items)
                 }
             }
