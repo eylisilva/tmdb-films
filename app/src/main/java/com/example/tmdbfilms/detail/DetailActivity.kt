@@ -46,6 +46,8 @@ class DetailActivity : BaseActivity() {
                     items.add(DetailOverviewMultiEntity(it.overview))
                     items.add(DetailSubtitleMultiEntity(getString(R.string.genres)))
                     items.add(DetailTextMultiEntity(it.genres))
+                    items.add(DetailSubtitleMultiEntity(getString(R.string.year)))
+                    items.add(DetailTextMultiEntity(it.year))
                     detailAdapter.setList(items)
                 }
             }

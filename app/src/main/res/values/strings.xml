@@ -24,5 +24,6 @@
     <string name="add_to_watch_list">Add to Watchlist</string>
     <string name="overview">Overview</string>
     <string name="genres">Genres</string>
+    <string name="year">Year</string>
 
 </resources>

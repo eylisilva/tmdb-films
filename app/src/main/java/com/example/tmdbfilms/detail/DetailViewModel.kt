@@ -25,7 +25,8 @@ data class DetailUiState(
     val backdropPath: String = "",
     val name: String = "",
     val overview: String = "",
-    val genres: String = ""
+    val genres: String = "",
+    val year: String = ""
 )
 
 @Suppress("UNCHECKED_CAST")
@@ -62,7 +63,8 @@ class DetailViewModel(private val getDetailPageDataUseCase: GetDetailPageDataUse
                     backdropPath = detailPageData.detailData.backdropPath,
                     name = detailPageData.detailData.title,
                     overview = detailPageData.detailData.overview,
-                    genres = detailPageData.detailData.genres
+                    genres = detailPageData.detailData.genres,
+                    year = detailPageData.detailData.year
                 )
             }
         }
