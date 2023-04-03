@@ -16,13 +16,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.*
 
 private const val TAG = "DetailViewModel"
 
 data class DetailUiState(
     val trailerVideoKey: String = "",
     val backdropPath: String = "",
-    val name: String = ""
+    val name: String = "",
+    val overview: String = ""
 )
 
 @Suppress("UNCHECKED_CAST")
@@ -57,7 +59,8 @@ class DetailViewModel(private val getDetailPageDataUseCase: GetDetailPageDataUse
                 it.copy(
                     trailerVideoKey = detailPageData.videoKey ?: "",
                     backdropPath = detailPageData.detailData.backdropPath,
-                    name = detailPageData.detailData.title
+                    name = detailPageData.detailData.title,
+                    overview = detailPageData.detailData.overview
                 )
             }
         }

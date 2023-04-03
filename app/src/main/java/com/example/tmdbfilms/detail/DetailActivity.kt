@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tmdbfilms.BaseActivity
 import com.example.tmdbfilms.R
 import com.example.tmdbfilms.detail.name.DetailNameMultiEntity
+import com.example.tmdbfilms.detail.overview.DetailOverviewMultiEntity
 import com.example.tmdbfilms.detail.video.PlaceHolderBackdropMultiEntity
 import com.example.tmdbfilms.detail.video.TrailerMultiEntity
 import com.example.tmdbfilms.home.ProviderMultiEntity
@@ -42,11 +43,12 @@ class DetailActivity : BaseActivity() {
                     }
                     items.add(DetailNameMultiEntity(it.name))
                     items.add(DetailSubtitleMultiEntity(getString(R.string.overview)))
+                    items.add(DetailOverviewMultiEntity(it.overview))
                     detailAdapter.setList(items)
                 }
             }
         }
-        val id = intent.getIntExtra("id", 0)
+        val id = intent.getIntExtra("id",  0)
         val mediaType = intent.getIntExtra("media_type", 0)
         detailViewModel.getDetailPageData(id, mediaType)
     }

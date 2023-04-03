@@ -7,6 +7,7 @@ const val TRAILER = 4
 const val PLACE_HOLDER_BACKDROP = 5
 const val DETAIL_NAME = 6
 const val DETAIL_SUBTITLE = 7
+const val DETAIL_OVERVIEW = 8
 
 interface ProviderMultiEntity {
 
