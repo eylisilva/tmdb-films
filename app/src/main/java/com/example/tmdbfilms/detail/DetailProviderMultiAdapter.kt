@@ -16,6 +16,7 @@ class DetailProviderMultiAdapter(lifecycle: Lifecycle): BaseProviderMultiAdapter
         addItemProvider(DetailNameItemProvider())
         addItemProvider(DetailSubtitleItemProvider())
         addItemProvider(DetailOverviewItemProvider())
+        addItemProvider(DetailTextItemProvider())
     }
 
     override fun getItemType(data: List<ProviderMultiEntity>, position: Int): Int {

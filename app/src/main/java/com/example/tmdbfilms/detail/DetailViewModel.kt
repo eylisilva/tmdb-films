@@ -24,7 +24,8 @@ data class DetailUiState(
     val trailerVideoKey: String = "",
     val backdropPath: String = "",
     val name: String = "",
-    val overview: String = ""
+    val overview: String = "",
+    val genres: String = ""
 )
 
 @Suppress("UNCHECKED_CAST")
@@ -60,7 +61,8 @@ class DetailViewModel(private val getDetailPageDataUseCase: GetDetailPageDataUse
                     trailerVideoKey = detailPageData.videoKey ?: "",
                     backdropPath = detailPageData.detailData.backdropPath,
                     name = detailPageData.detailData.title,
-                    overview = detailPageData.detailData.overview
+                    overview = detailPageData.detailData.overview,
+                    genres = detailPageData.detailData.genres
                 )
             }
         }
