@@ -38,11 +38,13 @@ class GetDetailPageDataUseCase(
                 TYPE_MOVIE -> videoRepository.getMovieVideoKey(id)
                 else -> videoRepository.getTvVideoKey(id)
             }
+            val addedToWatchList = watchListRepository.contains(id)
             DetailPageData(
                 detailData = detailData,
                 reviews = reviews,
                 recommendations = recommendations,
-                videoKey = videoKey
+                videoKey = videoKey,
+                addedToWatchList = addedToWatchList
             )
         }
     }

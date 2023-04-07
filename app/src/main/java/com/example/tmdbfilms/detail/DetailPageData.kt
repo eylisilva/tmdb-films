@@ -8,4 +8,5 @@ data class DetailPageData(
     val reviews: List<ReviewData>,
     val recommendations: List<CardData>,
     val videoKey: String? = null,
+    val addedToWatchList: Boolean
 )

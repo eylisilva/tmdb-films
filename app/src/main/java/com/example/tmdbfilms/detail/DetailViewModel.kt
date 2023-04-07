@@ -7,16 +7,16 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.tmdbfilms.AppContainer
 import com.example.tmdbfilms.UscFilmsApplication
-import com.example.tmdbfilms.search.SearchViewModel
+import com.example.tmdbfilms.home.AddToWatchListUseCase
+import com.example.tmdbfilms.home.RemoveFromWatchListUseCase
+import com.example.tmdbfilms.watchlist.WatchListItem
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.util.*
 
 private const val TAG = "DetailViewModel"
 
@@ -26,25 +26,37 @@ data class DetailUiState(
     val name: String = "",
     val overview: String = "",
     val genres: String = "",
-    val year: String = ""
+    val year: String = "",
+    val addedToWatchList: Boolean = false,
+    val onAddToWatchList: () -> Unit = {},
+    val onRemoveFromWatchList: () -> Unit = {},
+    val toastMessage: String? = null
 )
 
 @Suppress("UNCHECKED_CAST")
-class DetailViewModel(private val getDetailPageDataUseCase: GetDetailPageDataUseCase) :
+class DetailViewModel(
+    private val getDetailPageDataUseCase: GetDetailPageDataUseCase,
+    private val addToWatchListUseCase: AddToWatchListUseCase,
+    private val removeFromWatchListUseCase: RemoveFromWatchListUseCase
+) :
     ViewModel() {
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val container = (this[APPLICATION_KEY] as UscFilmsApplication).container
-                DetailViewModel(getDetailPageDataUseCase = GetDetailPageDataUseCase(
-                    videoRepository = container.videoRepository,
-                    detailRepository = container.detailRepository,
-                    watchListRepository = container.watchListRepository,
-                    reviewRepository = container.reviewRepository,
-                    moviesRepository = container.moviesRepository,
-                    tvShowsRepository = container.tvShowsRepository
-                ))
+                DetailViewModel(
+                    getDetailPageDataUseCase = GetDetailPageDataUseCase(
+                        videoRepository = container.videoRepository,
+                        detailRepository = container.detailRepository,
+                        watchListRepository = container.watchListRepository,
+                        reviewRepository = container.reviewRepository,
+                        moviesRepository = container.moviesRepository,
+                        tvShowsRepository = container.tvShowsRepository
+                    ),
+                    addToWatchListUseCase = AddToWatchListUseCase(container.watchListRepository),
+                    removeFromWatchListUseCase = RemoveFromWatchListUseCase(container.watchListRepository)
+                )
             }
         }
     }
@@ -57,16 +69,56 @@ class DetailViewModel(private val getDetailPageDataUseCase: GetDetailPageDataUse
             Log.e(TAG, "exception: $exception")
         }) {
             val detailPageData = getDetailPageDataUseCase.getDetailPageData(id, type)
-            _uiState.update {
-                it.copy(
+            _uiState.update { detailUiState ->
+                detailUiState.copy(
                     trailerVideoKey = detailPageData.videoKey ?: "",
                     backdropPath = detailPageData.detailData.backdropPath,
                     name = detailPageData.detailData.title,
                     overview = detailPageData.detailData.overview,
                     genres = detailPageData.detailData.genres,
-                    year = detailPageData.detailData.year
+                    year = detailPageData.detailData.year,
+                    addedToWatchList = detailPageData.addedToWatchList,
+                    onAddToWatchList = {
+                        viewModelScope.launch {
+                            addToWatchListUseCase.addToWatchList(
+                                WatchListItem(
+                                    id = id,
+                                    title = detailPageData.detailData.title,
+                                    posterPath = detailPageData.detailData.backdropPath,
+                                    mediaType = when (type) {
+                                        1 -> "movie"
+                                        2 -> "tv"
+                                        else -> "movie"
+                                    }
+                                )
+                            )
+                            _uiState.update {
+                                it.copy(
+                                    addedToWatchList = true,
+                                    toastMessage = "${detailPageData.detailData.title} was added to Watchlist"
+                                )
+                            }
+                        }
+                    },
+                    onRemoveFromWatchList = {
+                        viewModelScope.launch {
+                            removeFromWatchListUseCase.removeFromWatchList(id)
+                        }
+                        _uiState.update {
+                            it.copy(
+                                addedToWatchList = false,
+                                toastMessage = "${detailPageData.detailData.title} was removed from Watchlist"
+                            )
+                        }
+                    }
                 )
             }
+        }
+    }
+
+    fun toastMessageShown() {
+        _uiState.update {
+            it.copy(toastMessage = null)
         }
     }
 

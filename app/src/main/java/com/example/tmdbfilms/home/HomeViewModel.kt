@@ -47,13 +47,25 @@ class HomeViewModel(
                     loading = HomeLoadingState.Success,
                     moviesUiState = MoviesUiState(
                         homeData.movieSliderItems,
-                        convertToUiState(homeData.topRatedMovieItems),
-                        convertToUiState(homeData.popularMovieItems)
+                        convertToUiState(homeData.topRatedMovieItems,
+                            isMovie = true,
+                            isTopRated = true
+                        ),
+                        convertToUiState(homeData.popularMovieItems,
+                            isMovie = true,
+                            isTopRated = false
+                        )
                     ),
                     tvShowsUiState = TvShowsUiState(
                         homeData.tvShowSliderItems,
-                        convertToUiState(homeData.topRatedTvShowItems),
-                        convertToUiState(homeData.popularTvShowItems)
+                        convertToUiState(homeData.topRatedTvShowItems,
+                            isMovie = false,
+                            isTopRated = true
+                        ),
+                        convertToUiState(homeData.popularTvShowItems,
+                            isMovie = false,
+                            isTopRated = false
+                        )
                     )
                 )
             }
@@ -66,36 +78,36 @@ class HomeViewModel(
         }
     }
 
-    private suspend fun convertToUiState(list: List<CardData>?): List<CardUiState> {
+    private suspend fun convertToUiState(list: List<CardData>?, isMovie: Boolean, isTopRated: Boolean): List<CardUiState> {
         val results = mutableListOf<CardUiState>()
-        list?.forEach {
-            val addedToWatchList = isContainedInWatchListUseCase.isContainedInWatchList(it.id)
+        list?.forEach { cardData ->
+            val addedToWatchList = isContainedInWatchListUseCase.isContainedInWatchList(cardData.id)
             results.add(
                 CardUiState(
-                    id = it.id,
-                    posterPath = it.posterPath,
-                    type = it.type,
+                    id = cardData.id,
+                    posterPath = cardData.posterPath,
+                    type = cardData.type,
                     addedToWatchList = addedToWatchList,
                     onAddToWatchList = {
                         viewModelScope.launch {
                             addToWatchListUseCase.addToWatchList(
                                 WatchListItem(
-                                    it.id,
-                                    it.title,
-                                    it.posterPath,
-                                    it.type
+                                    cardData.id,
+                                    cardData.title,
+                                    cardData.posterPath,
+                                    cardData.type
                                 )
                             )
                             _homeUiStateFlow.update { state ->
-                                state.copy(toastMessage = "${it.title} was added to Watchlist")
+                                state.copy(toastMessage = "${cardData.title} was added to Watchlist")
                             }
                         }
                     },
                     onRemoveFromWatchList = {
                         viewModelScope.launch {
-                            removeFromWatchListUseCase.removeFromWatchList(it.id)
+                            removeFromWatchListUseCase.removeFromWatchList(cardData.id)
                             _homeUiStateFlow.update { state ->
-                                state.copy(toastMessage = "${it.title} was removed from Watchlist")
+                                state.copy(toastMessage = "${cardData.title} was removed from Watchlist")
                             }
                         }
                     }

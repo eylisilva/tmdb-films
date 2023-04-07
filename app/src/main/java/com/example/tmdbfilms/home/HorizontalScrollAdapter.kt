@@ -68,8 +68,10 @@ class HorizontalScrollAdapter :
                     R.id.add_to_watchlist -> {
                         if (item.addedToWatchList) {
                             item.onRemoveFromWatchList.invoke()
+                            setData(data.indexOf(item), item.copy(addedToWatchList = false))
                         } else {
                             item.onAddToWatchList.invoke()
+                            setData(data.indexOf(item), item.copy(addedToWatchList = true))
                         }
                         true
                     }
