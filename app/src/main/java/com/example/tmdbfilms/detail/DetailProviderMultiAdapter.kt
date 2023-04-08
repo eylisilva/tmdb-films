@@ -2,6 +2,7 @@ package com.example.tmdbfilms.detail
 
 import androidx.lifecycle.Lifecycle
 import com.chad.library.adapter.base.BaseProviderMultiAdapter
+import com.example.tmdbfilms.detail.actor.DetailCastItemProvider
 import com.example.tmdbfilms.detail.name.DetailNameItemProvider
 import com.example.tmdbfilms.detail.overview.DetailOverviewItemProvider
 import com.example.tmdbfilms.detail.shareandwatchlist.ShareAndWatchListItemProvider
@@ -19,6 +20,7 @@ class DetailProviderMultiAdapter(lifecycle: Lifecycle): BaseProviderMultiAdapter
         addItemProvider(DetailOverviewItemProvider())
         addItemProvider(DetailTextItemProvider())
         addItemProvider(ShareAndWatchListItemProvider())
+        addItemProvider(DetailCastItemProvider())
     }
 
     override fun getItemType(data: List<ProviderMultiEntity>, position: Int): Int {

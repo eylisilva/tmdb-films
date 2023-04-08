@@ -1,6 +1,5 @@
 package com.example.tmdbfilms.detail.actor
 
-import com.example.tmdbfilms.detail.actor.ActorData
 
 interface IActorRepository {
 

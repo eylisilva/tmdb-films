@@ -27,6 +27,8 @@
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/fragment_tv_shows.xml" value="0.1328125" />
         <entry key="app/src/main/res/layout/fragment_watch_list.xml" value="0.215625" />
+        <entry key="app/src/main/res/layout/item_detail_actor.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_detail_cast.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_detail_name.xml" value="0.11" />
         <entry key="app/src/main/res/layout/item_detail_overview.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_detail_share_watchlist.xml" value="0.1" />

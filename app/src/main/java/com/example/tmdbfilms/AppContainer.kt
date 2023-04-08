@@ -3,6 +3,8 @@ package com.example.tmdbfilms
 import android.content.Context
 import com.example.tmdbfilms.detail.DetailRepository
 import com.example.tmdbfilms.detail.IDetailRepository
+import com.example.tmdbfilms.detail.actor.ActorRepository
+import com.example.tmdbfilms.detail.actor.IActorRepository
 import com.example.tmdbfilms.detail.review.IReviewRepository
 import com.example.tmdbfilms.detail.review.ReviewRepository
 import com.example.tmdbfilms.detail.video.IVideoRepository
@@ -25,6 +27,7 @@ interface AppContainer {
     val videoRepository: IVideoRepository
     val detailRepository: IDetailRepository
     val reviewRepository: IReviewRepository
+    val actorRepository: IActorRepository
 }
 
 class AppContainerImpl(private val applicationContext: Context): AppContainer {
@@ -51,5 +54,7 @@ class AppContainerImpl(private val applicationContext: Context): AppContainer {
     override val reviewRepository: IReviewRepository
         get() = ReviewRepository(UscFilmsApi.retrofitService)
 
+    override val actorRepository: IActorRepository
+        get() = ActorRepository(UscFilmsApi.retrofitService)
 
 }

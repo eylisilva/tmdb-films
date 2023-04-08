@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tmdbfilms.BaseActivity
 import com.example.tmdbfilms.R
+import com.example.tmdbfilms.detail.actor.DetailCastMultiEntity
 import com.example.tmdbfilms.detail.name.DetailNameMultiEntity
 import com.example.tmdbfilms.detail.overview.DetailOverviewMultiEntity
 import com.example.tmdbfilms.detail.shareandwatchlist.DetailShareAndWatchListItemMultiEntity
@@ -65,6 +66,10 @@ class DetailActivity : BaseActivity() {
                             onRemoveFromWatchList = it.onRemoveFromWatchList
                         )
                     )
+                    if (it.cast.isNotEmpty()) {
+                        items.add(DetailSubtitleMultiEntity(getString(R.string.cast)))
+                        items.add(DetailCastMultiEntity(it.cast))
+                    }
                     detailAdapter.setList(items)
                 }
             }
