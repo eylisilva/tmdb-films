@@ -31,6 +31,7 @@
         <entry key="app/src/main/res/layout/item_detail_cast.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_detail_name.xml" value="0.11" />
         <entry key="app/src/main/res/layout/item_detail_overview.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_detail_review.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_detail_share_watchlist.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_detail_subtitle.xml" value="0.125" />
         <entry key="app/src/main/res/layout/item_detail_text.xml" value="0.10507246376811594" />

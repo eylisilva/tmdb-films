@@ -13,6 +13,7 @@ import com.example.tmdbfilms.R
 import com.example.tmdbfilms.detail.actor.DetailCastMultiEntity
 import com.example.tmdbfilms.detail.name.DetailNameMultiEntity
 import com.example.tmdbfilms.detail.overview.DetailOverviewMultiEntity
+import com.example.tmdbfilms.detail.review.ReviewMultiEntity
 import com.example.tmdbfilms.detail.shareandwatchlist.DetailShareAndWatchListItemMultiEntity
 import com.example.tmdbfilms.detail.video.PlaceHolderBackdropMultiEntity
 import com.example.tmdbfilms.detail.video.TrailerMultiEntity
@@ -69,6 +70,10 @@ class DetailActivity : BaseActivity() {
                     if (it.cast.isNotEmpty()) {
                         items.add(DetailSubtitleMultiEntity(getString(R.string.cast)))
                         items.add(DetailCastMultiEntity(it.cast))
+                    }
+                    items.add(DetailSubtitleMultiEntity(getString(R.string.reviews)))
+                    it.reviews.forEach { reviewData ->
+                        items.add(ReviewMultiEntity(reviewData))
                     }
                     detailAdapter.setList(items)
                 }

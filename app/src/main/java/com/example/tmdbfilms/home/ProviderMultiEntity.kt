@@ -11,6 +11,7 @@ const val DETAIL_OVERVIEW = 8
 const val DETAIL_TEXT = 9
 const val DETAIL_SHARE_WATCHLIST = 10
 const val DETAIL_CAST = 11
+const val DETAIL_REVIEW = 12
 
 interface ProviderMultiEntity {
 

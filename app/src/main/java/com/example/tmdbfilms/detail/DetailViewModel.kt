@@ -9,6 +9,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.tmdbfilms.UscFilmsApplication
 import com.example.tmdbfilms.detail.actor.ActorData
+import com.example.tmdbfilms.detail.review.ReviewData
 import com.example.tmdbfilms.home.AddToWatchListUseCase
 import com.example.tmdbfilms.home.RemoveFromWatchListUseCase
 import com.example.tmdbfilms.watchlist.WatchListItem
@@ -32,7 +33,8 @@ data class DetailUiState(
     val onAddToWatchList: () -> Unit = {},
     val onRemoveFromWatchList: () -> Unit = {},
     val toastMessage: String? = null,
-    val cast: List<ActorData> = listOf()
+    val cast: List<ActorData> = listOf(),
+    val reviews: List<ReviewData> = listOf()
 )
 
 @Suppress("UNCHECKED_CAST")
@@ -114,7 +116,8 @@ class DetailViewModel(
                             )
                         }
                     },
-                    cast = detailPageData.actors
+                    cast = detailPageData.actors,
+                    reviews = detailPageData.reviews
                 )
             }
         }

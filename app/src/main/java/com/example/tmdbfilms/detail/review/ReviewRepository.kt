@@ -10,12 +10,12 @@ class ReviewRepository(private val apiService: UscFilmsApiService) : IReviewRepo
     private val outputDateFormat = SimpleDateFormat("E, MMM dd yyyy", Locale.US)
 
     override suspend fun getMovieReviews(movieId: Int): List<ReviewData> =
-        apiService.getMovieReviews(movieId).results.map {
+        apiService.getMovieReviews(movieId).results.take(3).map {
             transformToReviewData(it)
         }
 
     override suspend fun getTvReviews(tvId: Int): List<ReviewData> =
-        apiService.getTvReviews(tvId).results.map {
+        apiService.getTvReviews(tvId).results.take(3).map {
             transformToReviewData(it)
         }
 
@@ -25,12 +25,14 @@ class ReviewRepository(private val apiService: UscFilmsApiService) : IReviewRepo
             val formattedDate = outputDateFormat.format(date)
             ReviewData(
                 "by ${review.author} on $formattedDate",
-                "${review.rating / 2}/5"
+                "${review.rating / 2}/5",
+                review.content
             )
         } else {
             ReviewData(
                 "by ${review.author}",
-                "${review.rating / 2}/5"
+                "${review.rating / 2}/5",
+                review.content
             )
         }
     }

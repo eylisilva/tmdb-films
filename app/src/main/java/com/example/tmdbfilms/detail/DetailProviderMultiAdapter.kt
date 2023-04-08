@@ -5,6 +5,7 @@ import com.chad.library.adapter.base.BaseProviderMultiAdapter
 import com.example.tmdbfilms.detail.actor.DetailCastItemProvider
 import com.example.tmdbfilms.detail.name.DetailNameItemProvider
 import com.example.tmdbfilms.detail.overview.DetailOverviewItemProvider
+import com.example.tmdbfilms.detail.review.DetailReviewItemProvider
 import com.example.tmdbfilms.detail.shareandwatchlist.ShareAndWatchListItemProvider
 import com.example.tmdbfilms.detail.video.PlaceholderBackdropItemProvider
 import com.example.tmdbfilms.detail.video.TrailerItemProvider
@@ -21,6 +22,7 @@ class DetailProviderMultiAdapter(lifecycle: Lifecycle): BaseProviderMultiAdapter
         addItemProvider(DetailTextItemProvider())
         addItemProvider(ShareAndWatchListItemProvider())
         addItemProvider(DetailCastItemProvider())
+        addItemProvider(DetailReviewItemProvider())
     }
 
     override fun getItemType(data: List<ProviderMultiEntity>, position: Int): Int {
