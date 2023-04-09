@@ -13,10 +13,12 @@ import com.example.tmdbfilms.R
 import com.example.tmdbfilms.detail.actor.DetailCastMultiEntity
 import com.example.tmdbfilms.detail.name.DetailNameMultiEntity
 import com.example.tmdbfilms.detail.overview.DetailOverviewMultiEntity
+import com.example.tmdbfilms.detail.recommended.RecommendedPicksScrollMultiEntity
 import com.example.tmdbfilms.detail.review.ReviewMultiEntity
 import com.example.tmdbfilms.detail.shareandwatchlist.DetailShareAndWatchListItemMultiEntity
 import com.example.tmdbfilms.detail.video.PlaceHolderBackdropMultiEntity
 import com.example.tmdbfilms.detail.video.TrailerMultiEntity
+import com.example.tmdbfilms.home.HorizontalScrollMultiEntity
 import com.example.tmdbfilms.home.ProviderMultiEntity
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -75,6 +77,8 @@ class DetailActivity : BaseActivity() {
                     it.reviews.forEach { reviewData ->
                         items.add(ReviewMultiEntity(reviewData))
                     }
+                    items.add(DetailSubtitleMultiEntity(getString(R.string.recommended_picks)))
+                    items.add(RecommendedPicksScrollMultiEntity(it.recommendedPicks))
                     detailAdapter.setList(items)
                 }
             }

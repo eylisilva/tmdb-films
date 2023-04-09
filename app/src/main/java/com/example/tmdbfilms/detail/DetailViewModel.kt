@@ -9,8 +9,10 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.tmdbfilms.UscFilmsApplication
 import com.example.tmdbfilms.detail.actor.ActorData
+import com.example.tmdbfilms.detail.recommended.RecommendedCardUiState
 import com.example.tmdbfilms.detail.review.ReviewData
 import com.example.tmdbfilms.home.AddToWatchListUseCase
+import com.example.tmdbfilms.home.CardUiState
 import com.example.tmdbfilms.home.RemoveFromWatchListUseCase
 import com.example.tmdbfilms.watchlist.WatchListItem
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -34,7 +36,8 @@ data class DetailUiState(
     val onRemoveFromWatchList: () -> Unit = {},
     val toastMessage: String? = null,
     val cast: List<ActorData> = listOf(),
-    val reviews: List<ReviewData> = listOf()
+    val reviews: List<ReviewData> = listOf(),
+    val recommendedPicks: List<RecommendedCardUiState> = listOf()
 )
 
 @Suppress("UNCHECKED_CAST")
@@ -117,7 +120,12 @@ class DetailViewModel(
                         }
                     },
                     cast = detailPageData.actors,
-                    reviews = detailPageData.reviews
+                    reviews = detailPageData.reviews,
+                    recommendedPicks = detailPageData.recommendations.map {
+                        RecommendedCardUiState(
+                            posterPath = it.posterPath,
+                        )
+                    }
                 )
             }
         }
