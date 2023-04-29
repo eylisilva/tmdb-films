@@ -13,6 +13,7 @@ const val DETAIL_SHARE_WATCHLIST = 10
 const val DETAIL_CAST = 11
 const val DETAIL_REVIEW = 12
 const val DETAIL_RECOMMENDED = 13
+const val REVIEWS_RATING = 14
 
 interface ProviderMultiEntity {
 

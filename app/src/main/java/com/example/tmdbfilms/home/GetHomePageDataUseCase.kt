@@ -10,7 +10,7 @@ class GetHomePageDataUseCase(
     private val tvShowsRepository: TvShowsRepository
 ) {
     suspend fun getHomePageData(): HomePageData {
-        return coroutineScope {
+         return coroutineScope {
             val movieSliderImageItems = async {
                 moviesRepository.getNowPlayingMovies()
             }

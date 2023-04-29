@@ -17,7 +17,8 @@ class DetailTextItemProvider: BaseItemProvider<ProviderMultiEntity>() {
 
     override fun convert(helper: BaseViewHolder, item: ProviderMultiEntity) {
         val detailTextTv = helper.getView<TextView>(R.id.tv_detail_text)
-        detailTextTv.text = (item as DetailTextMultiEntity).text
+        detailTextTv.maxLines = (item as DetailTextMultiEntity).maxLines
+        detailTextTv.text = item.text
     }
 
 }

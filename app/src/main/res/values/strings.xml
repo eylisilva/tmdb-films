@@ -26,4 +26,5 @@
     <string name="cast">Cast</string>
     <string name="reviews">Reviews</string>
     <string name="recommended_picks">Recommended Picks</string>
+    <string name="reviews_rating">%1$d/5</string>
 </resources>

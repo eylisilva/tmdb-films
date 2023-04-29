@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.18385416666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_reviews.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.17798913043478262" />
         <entry key="app/src/main/res/layout/footer_search.xml" value="0.16875" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
@@ -37,10 +38,12 @@
         <entry key="app/src/main/res/layout/item_detail_text.xml" value="0.10507246376811594" />
         <entry key="app/src/main/res/layout/item_footer.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_header.xml" value="0.1621376811594203" />
-        <entry key="app/src/main/res/layout/item_horizontal_scroll.xml" value="0.1234375" />
+        <entry key="app/src/main/res/layout/item_horizontal_scroll.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_horizontal_scroll_card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_image_slider.xml" value="0.11" />
         <entry key="app/src/main/res/layout/item_placeholder_backdrop.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_recommended_pick.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_reviews_rating.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_search_result.xml" value="0.23097826086956522" />
         <entry key="app/src/main/res/layout/item_share_watchlist.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_trailer.xml" value="0.1" />
