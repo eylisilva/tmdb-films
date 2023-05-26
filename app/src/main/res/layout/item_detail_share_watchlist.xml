@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    tools:background="@color/black">
+
+    <ImageView
+        android:id="@+id/iv_add_remove"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="10dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_baseline_add_circle_outline_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_facebook"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="5dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_baseline_facebook_24"
+        app:layout_constraintStart_toEndOf="@id/iv_add_remove"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_twitter"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="5dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_twitter_logo_dialog"
+        app:layout_constraintStart_toEndOf="@id/iv_facebook"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
