@@ -1,6 +1,7 @@
 package com.example.tmdbfilms.network
 
 import android.util.Log
+import com.example.tmdbfilms.BuildConfig
 import com.example.tmdbfilms.detail.*
 import com.example.tmdbfilms.detail.actor.CreditsApiModel
 import com.example.tmdbfilms.detail.review.ReviewsApiModel
@@ -24,7 +25,7 @@ private const val TAG = "UscFilmsApiService"
 
 private const val BASE_URL = "https://api.themoviedb.org/3/"
 
-private const val API_KEY = "93c502ad3ecf767be3daa1f584f33453"
+private const val API_KEY = BuildConfig.API_KEY
 
 object NullToEmptyStringAdapter {
     @FromJson
